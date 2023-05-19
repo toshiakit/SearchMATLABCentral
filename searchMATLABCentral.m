@@ -58,10 +58,9 @@ function results = searchMATLABCentral(query,options)
     end
 
     % convert optional inputs into a cell array of key-value pairs
-    keys = string(fieldnames(options));
-    vals = cellfun(@(x)(options.(x)),fieldnames(options));
-    params = [keys,vals];
-    params = cellstr(reshape(params.',[],numel(params)));
+    keys = fieldnames(options);
+    vals = struct2cell(options);
+    params = [keys,vals].';
 
     % call the API
     try
